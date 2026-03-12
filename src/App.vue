@@ -4,7 +4,15 @@ const contador = ref(0)
 const passar = ref(1)
 const mensagem = ref('')
 
+function validarEntrada() {
+  if (passar.value < 1) {
+    alert('Não pode adicionar número negativo!')
+    passar.value = 1
+  }
+}
+
 function incrementar() {
+  validarEntrada()
   const valor = contador.value + passar.value
 
   if (valor > 10) {
@@ -16,7 +24,9 @@ function incrementar() {
     mensagem.value = ''
   }
 }
+
 function decrementar() {
+  validarEntrada()
   const valor2 = contador.value - passar.value
 
   if (valor2 < 0) {
@@ -35,7 +45,7 @@ function decrementar() {
     <h1>O contador é {{ contador }}</h1>
     <div class="campo">
       <label>Valor a incrementar/decrementar: </label>
-      <input type="Number" v-model.number="passar" min="1">
+      <input type="Number" v-model.number="passar" min="1" @change="validarEntrada">
     </div>
 
     <div class="botoes">
